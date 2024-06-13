@@ -6,10 +6,13 @@ let currentDisplayValue;
 let buttonSelector = document.querySelectorAll(".calculator-btn");
 let calculatorDisplay = document.querySelector("#calculator-display");
 let buttonsForOperation = document.querySelectorAll(".calculator-btn-operand")
+let isOperationButtonClicked;
+let equalToButton = document.querySelector(".calculator-btn-equal-to");
+let result;
+let acButtonSelector = document.querySelector(".calculator-btn-ac");
 
 
 // functions for different operations
-
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -33,7 +36,7 @@ function divide(num1, num2) {
 
 // operate function to take numbers and operator and call operation function
 
-function operate(num1,num2,operator) {
+let operateFunctionExpression = function operate(num1,num2,operator) {
     if(operator == "+") {
         return add(num1,num2);
     }
@@ -60,7 +63,17 @@ buttonSelector.forEach(element => {
     element.addEventListener("click", function updateDisplay() {
          currentDisplayValue = calculatorDisplay.textContent = element.textContent;
          currentDisplayValue = Number(currentDisplayValue);
-         num1 = currentDisplayValue;
+
+
+
+         if(isOperationButtonClicked) {
+            num2 = currentDisplayValue;
+         }
+
+         else if (!isOperationButtonClicked){
+            num1 = currentDisplayValue;
+         }
+         
 
     });
 });
@@ -72,6 +85,7 @@ buttonsForOperation.forEach(element => {
     element.addEventListener("click", function updateDisplayOperandButton(){
         if(element.textContent == "+") {
             operator = "+";
+            
         }
         
         else if (element.textContent == "-") {
@@ -86,12 +100,25 @@ buttonsForOperation.forEach(element => {
         else if (element.textContent == "/") {
             operator = "/"
         }
-        
+       
+         isOperationButtonClicked = true;
     });
 })
 
 
 
+equalToButton.addEventListener("click", ()=> {
+    let finalAns = operateFunctionExpression(num1,num2,operator);
+    calculatorDisplay.textContent = finalAns;
+    
+});
 
 
+acButtonSelector.addEventListener("click", ()=>{
+    num1 = 0;
+    num2 = 0;
+    operator = "undefined"
+    isOperationButtonClicked = false;
+    calculatorDisplay.textContent = "0";
+})
 
