@@ -1,5 +1,6 @@
 // variables
-
+let displayString;
+let finalAns;
 let num1,num2; 
 let operator;
 let currentDisplayValue;
@@ -61,10 +62,12 @@ let operateFunctionExpression = function operate(num1,num2,operator) {
 
 buttonSelector.forEach(element => {
     element.addEventListener("click", function updateDisplay() {
-         currentDisplayValue = calculatorDisplay.textContent = element.textContent;
-         currentDisplayValue = Number(currentDisplayValue);
 
-
+         currentDisplayValue = calculatorDisplay.textContent = calculatorDisplay.textContent + element.textContent;
+         
+        
+        
+    
 
          if(isOperationButtonClicked) {
             num2 = currentDisplayValue;
@@ -75,7 +78,8 @@ buttonSelector.forEach(element => {
          }
          
 
-    });
+    }); 
+    currentDisplayValue = Number(currentDisplayValue);
 });
 
 
@@ -83,6 +87,10 @@ buttonSelector.forEach(element => {
 
 buttonsForOperation.forEach(element => {
     element.addEventListener("click", function updateDisplayOperandButton(){
+
+        calculatorDisplay.textContent = "";
+
+
         if(element.textContent == "+") {
             operator = "+";
             
@@ -108,10 +116,12 @@ buttonsForOperation.forEach(element => {
 
 
 equalToButton.addEventListener("click", ()=> {
-    let finalAns = operateFunctionExpression(num1,num2,operator);
+    finalAns = operateFunctionExpression(num1,num2,operator);
     calculatorDisplay.textContent = finalAns;
     
 });
+
+
 
 
 acButtonSelector.addEventListener("click", ()=>{
@@ -119,6 +129,6 @@ acButtonSelector.addEventListener("click", ()=>{
     num2 = 0;
     operator = "undefined"
     isOperationButtonClicked = false;
-    calculatorDisplay.textContent = "0";
+    calculatorDisplay.textContent = "";
 })
 
