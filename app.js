@@ -6,6 +6,7 @@ let operator;
 let currentDisplayValue;
 let buttonSelector = document.querySelectorAll(".calculator-btn");
 let calculatorDisplay = document.querySelector("#calculator-display");
+
 let buttonsForOperation = document.querySelectorAll(".calculator-btn-operand")
 let isOperationButtonClicked;
 let equalToButton = document.querySelector(".calculator-btn-equal-to");
@@ -86,8 +87,7 @@ buttonsForOperation.forEach(element => {
     
     
      element.addEventListener("click", ()=> {
-        operator = element.textContent
-
+       
         if(!num2) {
             calculatorDisplay.textContent = ""
     
@@ -96,12 +96,14 @@ buttonsForOperation.forEach(element => {
         else {  
             calculatorDisplay.textContent = ""
             num1 = operateFunctionExpression(num1,num2,operator);
+            num2 = undefined;
             
-            
+           
             
             
         }
-        
+        operator = element.textContent
+
         isOperationButtonClicked = true;
        
     });
@@ -126,6 +128,7 @@ acButtonSelector.addEventListener("click", () => {
     operator = "undefined"
     isOperationButtonClicked = false;
     calculatorDisplay.textContent = "";
+  
 
 })
 
