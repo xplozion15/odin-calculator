@@ -102,7 +102,7 @@ buttonsForOperation.forEach(element => {
             
             
         }
-        operator = element.textContent
+        operator = element.textContent;
 
         isOperationButtonClicked = true;
        
@@ -131,6 +131,7 @@ acButtonSelector.addEventListener("click", () => {
   
 
 })
+
 
 
 
