@@ -29,13 +29,14 @@ body {
     color: black;
     text-align: right;
     padding: 15px;
-    font-weight: 200;
+    font-weight: 600;
     font-size: 25px;
+    overflow: scroll;
 }
 
 
 
-.calculator-btn { 
+.calculator-btn,.dot-btn{ 
     background-color: rgba(255, 255, 255, 0.951);
     width: 60px;
     height: 60px;
@@ -46,9 +47,9 @@ body {
 }
 
 
+
 .operation-btn {
     background-color:rgba(0, 0, 0, 0.263);
-    /* border: 2px solid #bc4749; */
     height: 60px;
     width: 60px;
     border-radius: 10px;
@@ -56,33 +57,7 @@ body {
 }
 
 
-#flexbox-one {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-
-#flexbox-two {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-#flexbox-three {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-
-#flexbox-four {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-#flexbox-five {
+#flexbox-one, #flexbox-two, #flexbox-three, #flexbox-four, #flexbox-five  {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -94,8 +69,7 @@ body {
     height: 60px;
     border-radius: 10px;
     margin: 2px;
-    color: black;
-    
+    color: black; 
 }
 
 .ac-btn,.equal-btn {
