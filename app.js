@@ -1,19 +1,16 @@
-// variables
+// Variables
 
-let finalAns;
-let num1, num2;
-let operator;
-let currentDisplayValue;
+let finalAns, num1, num2, operator, currentDisplayValue, isOperationButtonClicked;
 let buttonSelector = document.querySelectorAll(".calculator-btn");
 let calculatorDisplay = document.querySelector("#calculator-display");
-
-let buttonsForOperation = document.querySelectorAll(".calculator-btn-operand")
-let isOperationButtonClicked;
+let buttonsForOperation = document.querySelectorAll(".calculator-btn-operand") 
 let equalToButton = document.querySelector(".calculator-btn-equal-to");
-let acButtonSelector = document.querySelector(".calculator-btn-ac");
+let acButtonSelector = document.querySelector(".ac-btn");
+let dotBtnSelector = document.querySelectorAll(".dot-btn");
 
 
-// functions for different operations
+// functions for different arithmetic operations
+
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -60,8 +57,7 @@ let operateFunctionExpression = function operate(num1, num2, operator) {
 buttonSelector.forEach(element => {
     element.addEventListener("click", function updateDisplay() {
 
-        currentDisplayValue = calculatorDisplay.textContent +
-            element.textContent;
+        currentDisplayValue = calculatorDisplay.textContent + element.textContent;
         calculatorDisplay.textContent = currentDisplayValue;
 
 
@@ -75,52 +71,56 @@ buttonSelector.forEach(element => {
         else if (!isOperationButtonClicked) {
             num1 = currentDisplayValue;
         }
-
-
     });
-
 });
 
 
 
+// event listener for arithmetic operation button
+
 buttonsForOperation.forEach(element => {
-    
-    
-     element.addEventListener("click", ()=> {
-       
-        if(!num2) {
+
+    element.addEventListener("click", () => {
+
+        if (!num2) {
             calculatorDisplay.textContent = ""
-    
         }
-    
-        else {  
+
+        else {
             calculatorDisplay.textContent = ""
-            num1 = operateFunctionExpression(num1,num2,operator);
+            num1 = operateFunctionExpression(num1, num2, operator);
             num2 = undefined;
-            
-           
-            
-            
+
         }
         operator = element.textContent;
-
         isOperationButtonClicked = true;
-       
+
     });
-   
 })
 
 
 
-
+// event listener for equal to button to calculate final answer and round it if it contains a decimal point.
+// added a funny youtube video redirect (out of the scope of syllabus) when user divides a number by 0 XD
 
 equalToButton.addEventListener("click", () => {
-    finalAns = operateFunctionExpression(num1, num2, operator);
-    calculatorDisplay.textContent = finalAns;
-
+    if (operator === '/' && num2 === 0) {
+        window.open('https://www.youtube.com/embed/FEmxJoBLKws?autoplay=1', '_blank');
+    } else {
+        finalAns = operateFunctionExpression(num1, num2, operator);
+        if(num1 % 1 == 0 && num2 % 1 == 0) {
+            calculatorDisplay.textContent = finalAns;
+        }
+        else if (num1 %1 != 0 || num2 % 1 != 0) {
+            calculatorDisplay.textContent = finalAns.toFixed(1);
+        } 
+    }
 });
 
 
+
+
+// event listener for ac (reset) button which resets the numbers , operators , and essential booleans
 
 acButtonSelector.addEventListener("click", () => {
     num1 = 0;
@@ -128,11 +128,23 @@ acButtonSelector.addEventListener("click", () => {
     operator = "undefined"
     isOperationButtonClicked = false;
     calculatorDisplay.textContent = "";
-  
 
 })
 
 
 
+// event listener for the dot (.) button to allow only one decimal point and manipulate the dom (display) with dot.
 
+dotBtnSelector.forEach((element) => {
+    element.addEventListener("click", () => {
+        
+        if (calculatorDisplay.textContent.includes(".")) {
+            return;
+        }
+        else {
+            console.log("its working");
+            calculatorDisplay.textContent += element.textContent;
+    }
+    });
+});
 
